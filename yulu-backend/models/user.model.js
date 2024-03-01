@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        role:{
+        role: {
             type: DataTypes.ENUM,
             values: ["user", "admin"],
         }
@@ -34,10 +34,15 @@ module.exports = (sequelize, DataTypes) => {
                 const hashedPassword = await bcrypt.hash(user.password, 10);
                 user.password = hashedPassword;
             }
+        },
+        defaultScope: {
+            attributes: {
+                exclude: ['password']
+            }
         }
     });
 
-    User.prototype.comparePassword = async function(password) {
+    User.prototype.comparePassword = async function (password) {
         return await bcrypt.compare(password, this.password);
     };
 
