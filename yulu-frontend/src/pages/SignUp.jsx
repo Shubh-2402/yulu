@@ -17,7 +17,7 @@ const SignupPage = () => {
             const response = await axiosInstance.post(signup_url, data);
 
             if (response.status === 201) {
-
+                toast.success(response.data.message);
                 navigate("/login");
             }
         } catch (error) {

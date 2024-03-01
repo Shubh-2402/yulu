@@ -21,7 +21,8 @@ const LoginPage = () => {
                 expiryDate.setTime(expiryDate.getTime() + (1 * 60 * 60 * 1000)); // 1 hour from now
 
                 // Set cookie
-                document.cookie = `authToken=${authToken}; expires=${expiryDate.toUTCString()}; path=/`;
+                document.cookie = `authToken=${JSON.stringify({ value: authToken, expires: expiryDate.toUTCString() })}; expires=${expiryDate.toUTCString()}; path=/`;
+                
                 navigate("/");
             }
         } catch (error) {
