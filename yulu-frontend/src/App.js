@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import PrivateRoutes from './utils/PrivateRoutes';
 import LoginPage from './pages/Login';
 import Users from './pages/Users';
@@ -23,6 +23,7 @@ function App() {
             </Route>
             <Route element={<LoginPage />} path="/login" />
             <Route element={<SignupPage />} path="/signup" />
+            <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </AuthProvider>
       </Router>
