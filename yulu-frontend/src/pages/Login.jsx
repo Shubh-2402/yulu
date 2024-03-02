@@ -1,15 +1,28 @@
 import { useForm } from "react-hook-form";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from 'react-router';
+import { useEffect } from "react";
 
 
 const LoginPage = () => {
-    const { login } = useAuth();
+    const { user , login } = useAuth();
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(user){
+            navigate("/");
+        }
+    },[]);
+
+    
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
         login(data);
     };
+
+    
 
     return (
         <div className="d-flex flex-column justify-content-center h-100">

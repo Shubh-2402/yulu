@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import axiosInstance from '../utils/axiosInstance';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useAuth } from '../context/AuthContext';
 
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const SignupPage = () => {
+    const {user} = useAuth();
     const navigate = useNavigate();
+
+    useEffect(()=>{
+        if(user){
+            navigate("/");
+        }
+    },[]);
 
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
 
