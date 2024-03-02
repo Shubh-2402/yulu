@@ -6,6 +6,7 @@ import './App.css';
 import SignupPage from './pages/SignUp';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
+import Show from './pages/Show';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Routes>
             <Route element={<PrivateRoutes />}>
               <Route element={<Users />} path="/" exact />
+              <Route element={<Show />} path="/user/:id" />
             </Route>
             <Route element={<LoginPage />} path="/login" />
             <Route element={<SignupPage />} path="/signup" />

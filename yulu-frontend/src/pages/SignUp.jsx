@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const SignupPage = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const { register, handleSubmit, getValues, formState: { errors } } = useForm();
 
@@ -21,7 +21,6 @@ const SignupPage = () => {
                 navigate("/login");
             }
         } catch (error) {
-            console.log(error);
             toast.error(error.response.data.message);
         }
     };

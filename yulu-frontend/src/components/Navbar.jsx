@@ -8,13 +8,13 @@ function Navbar() {
             <a className="navbar-brand" href="/">Yulu</a>
             {
                 user ? (
-                    <button type="button" class="btn btn-default btn-sm" onClick={logout}>
-                        <i class="bi bi-box-arrow-right"></i> Log out
+                    <button type="button" className="btn btn-default btn-sm" onClick={logout}>
+                        <i className="bi bi-box-arrow-right"></i> Log out
                     </button>
                 ) : (
                     <a href='/login'>
-                        <button type="button" class="btn btn-default btn-sm">
-                            <i class="bi bi-box-arrow-left"></i> Log in
+                        <button type="button" className="btn btn-default btn-sm">
+                            <i className="bi bi-box-arrow-left"></i> Log in
                         </button>
                     </a>
                 )

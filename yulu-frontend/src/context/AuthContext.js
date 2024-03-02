@@ -56,7 +56,6 @@ export const AuthProvider = ({ children }) => {
                 navigate("/");
             }
         } catch (error) {
-            console.log(error);
             toast.error(error.response.data.message);
         }
     };
@@ -77,8 +76,8 @@ export const AuthProvider = ({ children }) => {
     return (
         <AuthContext.Provider value={authContextValue}>
             {loading ? (
-                <div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
+                <div className="spinner-border" role="status">
+                    <span className="sr-only">Loading...</span>
                 </div>
             ) : (
                 children
