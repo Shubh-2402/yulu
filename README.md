@@ -1,3 +1,13 @@
+## Demo Video
+https://drive.google.com/file/d/1KLcgROoJZfqjtHUzXHva2Pwict0Z6w6F/view?usp=sharing
+
+## Salient Features
+   1. JWT based authentication
+   2. Role based access control (RBAC) on api routes
+   3. Sequelize ORM used for quering MySQL database
+   4. Input validation on client side
+   5. React Context API - To manage user authentication and authorization on client side.
+
 ## Getting Started
 
 To get a local copy up and running, please follow these simple steps.
