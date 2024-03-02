@@ -7,6 +7,7 @@ import SignupPage from './pages/SignUp';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import Show from './pages/Show';
+import Edit from './pages/Edit';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route element={<PrivateRoutes />}>
               <Route element={<Users />} path="/" exact />
               <Route element={<Show />} path="/user/:id" />
+              <Route element={<Edit />} path="/edit/:id" />
             </Route>
             <Route element={<LoginPage />} path="/login" />
             <Route element={<SignupPage />} path="/signup" />

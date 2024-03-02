@@ -15,7 +15,7 @@ function Users() {
   useEffect(() => {
     const fetcAllUsers = async () => {
       try {
-        const url = `${BASE_URL}user?role=user`;
+        const url = `${BASE_URL}user/`;
         const response = await axiosInstance.get(url);
 
         if (response.status === 200) {
@@ -27,6 +27,23 @@ function Users() {
     }
     fetcAllUsers();
   }, [])
+
+  const handleDelete = (user)=>{
+    const deleteUser = async (user) => {
+      try {
+        const url = `${BASE_URL}user/${user.id}`;
+        const response = await axiosInstance.delete(url);
+
+        if (response.status === 200) {
+          setUsers(prevUsers => prevUsers.filter((u)=> u.id !==user.id));
+          toast.success(`User : ${user.username} deleted successfully`);
+        }
+      } catch (error) {
+        toast.error(error.response.data.message);
+      }
+    }
+    deleteUser(user);
+  }
 
   return (
     <div className="d-flex flex-column justify-content-center h-100">
@@ -45,23 +62,26 @@ function Users() {
                     {
                       users.map((user,index) => (<div key={index}>
                         <div className="row">
-                          <div className="col-sm-3">
+                          <div className="col-sm-2">
                             <i className="bi bi-person" style={{ fontSize: "2rem" }}></i>
                           </div>
-                          <div className="col-sm-3">
+                          <div className="col-sm-2">
                             <p className="text-muted mb-0">{user?.username}</p>
                           </div>
-                          <div className="col-sm-3">
+                          <div className="col-sm-2">
                             <p className="text-muted mb-0">{user?.email}</p>
+                          </div>
+                          <div className="col-sm-2">
+                            <p className="text-muted mb-0">{user?.role}</p>
                           </div>
                           <div className='col-sm-3'>
                             <button type="button" className="btn btn-primary btn-sm" onClick={()=>{ navigate(`/user/${user?.id}`)}}>
                               <i className="bi bi-eye" style={{ fontSize: "1rem" }}></i>
                             </button>
-                            <button type="button" className="btn btn-success btn-sm" style={{ marginLeft: '5px', marginRight: '5px' }}>
+                            <button type="button" className="btn btn-success btn-sm" style={{ marginLeft: '5px', marginRight: '5px' }} disabled={user?.role==="admin"} onClick={()=>{ navigate(`/edit/${user?.id}`)}}>
                               <i className="bi bi-pen" style={{ fontSize: "1rem" }}></i>
                             </button>
-                            <button type="button" className="btn btn-danger btn-sm">
+                            <button type="button" className="btn btn-danger btn-sm" disabled={user?.role ==="admin"} onClick={()=>handleDelete(user)}>
                               <i className="bi bi-trash" style={{ fontSize: "1rem" }}></i>
                             </button>
                           </div>

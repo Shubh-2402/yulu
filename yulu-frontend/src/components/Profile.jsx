@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Profile({user}) {
+function Profile({user, title="My Profile"}) {
 
     return user && (
         <div className="card">
-            <h2 className="card-title text-center">User Profile</h2>
+            <h2 className="card-title text-center">{title}</h2>
             <div className="card-body py-md-4">
                 <div className="row justify-content-center">
                     <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
