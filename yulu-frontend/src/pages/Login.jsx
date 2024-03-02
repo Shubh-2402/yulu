@@ -1,34 +1,14 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import axiosInstance from "../utils/axiosInstance";
-import { toast } from "react-toastify";
+import { useAuth } from "../context/AuthContext";
 
-const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 const LoginPage = () => {
-    const navigate = useNavigate()
+    const { login } = useAuth();
 
     const { register, handleSubmit, formState: { errors } } = useForm();
 
     const onSubmit = async (data) => {
-        try {
-            const signup_url = `${BASE_URL}auth/login`;
-            const response = await axiosInstance.post(signup_url, data);
-
-            if (response.status === 200) {
-                const authToken = response.data.token;
-                const expiryDate = new Date();
-                expiryDate.setTime(expiryDate.getTime() + (1 * 60 * 60 * 1000)); // 1 hour from now
-
-                // Set cookie
-                document.cookie = `authToken=${JSON.stringify({ value: authToken, expires: expiryDate.toUTCString() })}; expires=${expiryDate.toUTCString()}; path=/`;
-                
-                navigate("/");
-            }
-        } catch (error) {
-            console.log(error);
-            toast.error(error.response.data.message);
-        }
+        login(data);
     };
 
     return (
@@ -60,50 +40,7 @@ const LoginPage = () => {
                 </div>
             </div>
         </div>
-
     );
 };
 
 export default LoginPage;
-
-// export async function action({ request }) {
-//   const url = request.url;
-//   const searchParams = new URL(request.url).searchParams;
-//   const mode = searchParams.get('mode') || 'login';
-
-//   if (mode !== 'login' && mode !== 'signup') {
-//     throw json({ message: 'mode is not valid!' });
-//   }
-
-//   const data = await request.formData();
-
-//   const authData = {
-//     email: data.get('email'),
-//     password: data.get('password'),
-//   };
-
-//   const response = await fetch('http://localhost:8001/' + mode, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(authData),
-//   });
-
-//   if (response.status === 400 || response.status === 401 || response.status === 409) {
-//     return response;
-//   }
-
-//   if (!response.ok) {
-//     throw json({ msg: 'Can not authenticate the user' }, { status: 500 });
-//   }
-
-//   // access token
-//   const respData = await response.json();
-
-//   const token = respData.token;
-
-//   saveAuthToken(token);
-
-//   return redirect('/');
-// }

@@ -66,10 +66,28 @@ const deleteUser = async (req, res) => {
     }
 };
 
+const getProfile = async (req, res) => {
+    try{
+        const userData = req.user;
+
+        const userId = userData.userId;
+        const user = await User.findByPk(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.status(200).json({user});
+    }catch(error){
+        res.status(500).json({ message: 'Internal Server Error', error });
+    }
+};
+
   
 module.exports = {
     getUsers,
     getUser,
     updateUser,
     deleteUser,
+    getProfile,
   };

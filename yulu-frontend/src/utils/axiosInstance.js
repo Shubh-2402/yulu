@@ -1,5 +1,5 @@
 import axios from "axios";
-import getCookie from "./getCookie";
+import { getCookie } from "./cookieHelper";
 
 const axiosInstance = axios.create();
 

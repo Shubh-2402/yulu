@@ -43,8 +43,13 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     User.prototype.comparePassword = async function (password) {
-        return await bcrypt.compare(password, this.password);
+        const user = await User.findByPk(this.id, { attributes: ['password'] });
+        if (!user) {
+            return false;
+        }
+        return await bcrypt.compare(password, user.password);
     };
+    
 
     return User;
 };
